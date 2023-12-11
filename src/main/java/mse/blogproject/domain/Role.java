@@ -1,4 +1,4 @@
-package mse.blogproject.domain.user;
+package mse.blogproject.domain;
 
 
 import lombok.Getter;
