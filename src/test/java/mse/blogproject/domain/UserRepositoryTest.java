@@ -1,6 +1,8 @@
 package mse.blogproject.domain;
 
+import mse.blogproject.domain.user.Role;
 import mse.blogproject.domain.user.User;
+import mse.blogproject.domain.user.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

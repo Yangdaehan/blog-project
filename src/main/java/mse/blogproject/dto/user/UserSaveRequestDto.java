@@ -1,12 +1,8 @@
 package mse.blogproject.dto.user;
 
-
-import mse.blogproject.domain.Role;
+import mse.blogproject.domain.user.Role;
 import mse.blogproject.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @AllArgsConstructor
@@ -29,4 +25,5 @@ public class UserSaveRequestDto {
                 .role(Role.USER)
                 .build();
     }
+
 }

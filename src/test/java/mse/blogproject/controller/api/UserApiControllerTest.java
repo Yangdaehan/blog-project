@@ -1,9 +1,9 @@
 package mse.blogproject.controller.api;
 
 
-import mse.blogproject.domain.Role;
+import mse.blogproject.domain.user.Role;
 import mse.blogproject.domain.user.User;
-import mse.blogproject.domain.UserRepository;
+import mse.blogproject.domain.user.UserRepository;
 import mse.blogproject.dto.user.UserSaveRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -33,26 +34,29 @@ public class UserApiControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @AfterEach
     public void cleanup() throws Exception {
         userRepository.deleteAll();
     }
 
     @Test
-    public void User_doneRegister_test() throws Exception {
+    public void User_가입완료_테스트() throws Exception {
         //given
         String username = "test";
         String nickname = "babo";
 
         UserSaveRequestDto userSaveRequestDto = UserSaveRequestDto.builder()
                 .username(username)
-                .password("1234")
+                .password(bCryptPasswordEncoder.encode("1234"))
                 .email("test@naver.com")
                 .nickname(nickname)
                 .role(Role.USER)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/user";
+        String url = "http://localhost:" + port + "/auth/api/v1/user";
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, userSaveRequestDto, Long.class);
